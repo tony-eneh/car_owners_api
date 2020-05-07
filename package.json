@@ -1,0 +1,22 @@
+{
+    "name": "car_owners_api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tony-eneh/car_owners.git"
+    },
+    "keywords": [
+        "car"
+    ],
+    "author": "Tony Eneh",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/tony-eneh/car_owners/issues"
+    },
+    "homepage": "https://github.com/tony-eneh/car_owners#readme"
+}
