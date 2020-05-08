@@ -7,7 +7,7 @@
         "transpile": "babel src -d dist",
         "build": "npm run transpile",
         "postinstall": "npm run build",
-        "start": "nodemon dist/index.js",
+        "start": "node dist/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -32,8 +32,7 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "mongodb": "^3.5.7",
-        "mongoose": "^5.9.12",
-        "nodemon": "^2.0.3"
+        "mongoose": "^5.9.12"
     },
     "devDependencies": {
         "mocha": "^7.1.2",
