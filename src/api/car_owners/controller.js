@@ -20,12 +20,19 @@ export const getOwners = (req, res) => {
     //from the json payload, or url query parameters or just use an empty object
     let query = req.body ? req.body : req.query || {};
     console.log`query passed to db ${query}`;
-    
-    OwnersModel.find(query, (err, data) => {
-        if (err) console.log ` ERROR FROM MODEL ${err}`;
-        console.log('data fetched from db'+data);
+    const {start_year, end_year, gender, countries, colors} = query;
+    OwnersModel.find({'gender': new RegExp(`${gender}`, 'i')})
+    .where('car_model_year')
+    .gte(start_year)
+    .lte(end_year)
+    .where('countries')
+    .in(countries)                                                                                                                                                                                                                                                                                                                                                                                                                              
+    .where('car_color')
+    .in(colors)
+    .exec((err, data)=>{
+        if (err) console.log` ERROR FROM MODEL WHILE LOOKING FOR YOUR CARS LIST: ${err}`;
         res.send(data);
-    });
+    } )
 };
 
 export const createOwner = (req, res) => {
