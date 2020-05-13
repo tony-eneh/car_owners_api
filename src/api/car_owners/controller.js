@@ -18,20 +18,34 @@ export const getOwners = (req, res) => {
 
     //create query object
     //from the json payload, or url query parameters or just use an empty object
-    let query = req.body ? req.body : req.query || {};
+    let query = req.query || {};
     console.log`query passed to db ${query}`;
-    const {start_year, end_year, gender, countries, colors} = query;
-    OwnersModel.find({'gender': new RegExp(`${gender}`, 'i')})
-    .where('car_model_year')
-    .gte(start_year)
-    .lte(end_year)
-    .where('countries')
-    .in(countries)                                                                                                                                                                                                                                                                                                                                                                                                                              
-    .where('car_color')
-    .in(colors)
+    let {start_year, end_year, gender, countries, colors} = JSON.parse(query.filter);
+    console.log(JSON.parse(query.filter))
+    
+    // Build query
+    let dbQuery = {};
+    if (start_year && end_year){
+        dbQuery['car_model_year'] = {$gte : start_year, $lte : end_year}
+    }
+    if (gender){
+        // Convert first letter of gender string. That is the format stored in the db
+        gender = gender.replace(gender[0], gender[0].toUpperCase());
+        dbQuery['gender'] = gender;
+    }
+    if (countries){
+        dbQuery['country'] = {$in : countries}
+    }
+    if (colors){
+        dbQuery['car_color'] = {$in : colors}
+    }
+
+    console.log('dbQuery',dbQuery);
+    OwnersModel.find(dbQuery)
     .exec((err, data)=>{
-        if (err) console.log` ERROR FROM MODEL WHILE LOOKING FOR YOUR CARS LIST: ${err}`;
-        res.send(data);
+        if(err) return console.error('ERR', err)
+        console.log('fetched data from db')
+        res.json(data);
     } )
 };
 
