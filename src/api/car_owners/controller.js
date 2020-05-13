@@ -33,10 +33,10 @@ export const getOwners = (req, res) => {
         gender = gender.replace(gender[0], gender[0].toUpperCase());
         dbQuery['gender'] = gender;
     }
-    if (countries){
+    if (countries.length){
         dbQuery['country'] = {$in : countries}
     }
-    if (colors){
+    if (colors.length){
         dbQuery['car_color'] = {$in : colors}
     }
 
