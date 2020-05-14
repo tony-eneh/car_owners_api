@@ -18,8 +18,9 @@ app.use(bodyParser());
 app.use(cors());
 
 // explicitly set response allow origin header
-app.use((req,res)=>{
+app.use((req,res, next)=>{
     res.set('Access-Control-Allow-Origin', '*');
+    return next();
 })
 
 //route all traffic using /api path to our router
