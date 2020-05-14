@@ -17,6 +17,11 @@ const app = express();
 app.use(bodyParser());
 app.use(cors());
 
+// explicitly set response allow origin header
+app.use((req,res)=>{
+    res.set('Access-Control-Allow-Origin', '*');
+})
+
 //route all traffic using /api path to our router
 app.use('/api', apiRouter);
 
