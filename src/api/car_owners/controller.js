@@ -4,7 +4,7 @@ import { OwnersModel } from './model';
 console.log('entered /api/car_owners/controller.js');
 
 // db query builder
-const buildQuery = (queryStr)=>{
+export const buildQuery = (queryStr)=>{
     // parse the string to object
     const urlQuery = JSON.parse(queryStr);
     
